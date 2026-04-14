@@ -1,6 +1,6 @@
 # Car Plate Extractor ( GUI )
 
-AutoPlate Pro is a modern, high-fidelity AI-powered desktop application designed to extract and identify license plate numbers from images with high precision.
+AI-powered desktop application designed to extract and identify license plate numbers from images with high precision.
 
 ## 🚀 Key Features
 
