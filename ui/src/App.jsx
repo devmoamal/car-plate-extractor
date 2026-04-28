@@ -17,11 +17,7 @@ const EXAMPLES = [
   },
   {
     title: "How It Works",
-    desc: "Uses EasyOCR with advanced pattern matching to detect and filter license plate text from images.",
-  },
-  {
-    title: "Confidence Score",
-    desc: "Each detected plate includes a confidence percentage. Results above 80% are highly reliable.",
+    desc: "Uses EasyOCR with pattern matching to detect and extract license plate text from vehicle images.",
   },
   {
     title: "Best Practices",
@@ -187,35 +183,19 @@ export default function App() {
                 : `${results.total} plate${results.total > 1 ? "s" : ""} detected`}
             </p>
 
-            {results.plates.map((plate, i) => {
-              const pct = Math.round(plate.confidence * 100);
-              return (
-                <div
-                  key={i}
-                  className="flex items-center justify-between px-4 py-3.5 rounded-lg bg-surface border border-border"
-                >
-                  <div className="flex items-center gap-3">
-                    {i === 0 && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-success shrink-0" />
-                    )}
-                    <span className="text-base font-semibold tracking-[0.12em]">
-                      {plate.text}
-                    </span>
-                  </div>
-                  <span
-                    className={`text-xs font-medium tabular-nums ${
-                      pct >= 80
-                        ? "text-success"
-                        : pct >= 60
-                        ? "text-warning"
-                        : "text-danger"
-                    }`}
-                  >
-                    {pct}%
-                  </span>
-                </div>
-              );
-            })}
+            {results.plates.map((plate, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-3 px-4 py-3.5 rounded-lg bg-surface border border-border"
+              >
+                {i === 0 && (
+                  <span className="w-1.5 h-1.5 rounded-full bg-success shrink-0" />
+                )}
+                <span className="text-base font-semibold tracking-[0.12em]">
+                  {plate}
+                </span>
+              </div>
+            ))}
           </div>
         )}
       </main>
