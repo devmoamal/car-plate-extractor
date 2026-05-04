@@ -2,6 +2,6 @@
   "name": "carplate",
   "private": true,
   "scripts": {
-    "dev": "npx -y concurrently -n api,ui -c blue,green \"python3 -m uvicorn server:app --reload\" \"cd ui && npm run dev\""
+    "dev": "npx -y concurrently -n api,ui -c blue,green \"python3 -m uvicorn server:app --reload\" \"cd ui && bun run dev\""
   }
 }

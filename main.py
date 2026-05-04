@@ -1,27 +1,24 @@
 import easyocr
 import re
 
-# Initialize EasyOCR Reader
-# This will download models on first run
-_reader = None
-
-def get_reader():
-    global _reader
-    if _reader is None:
-        _reader = easyocr.Reader(['en'])
-    return _reader
-
 def get_plate_numbers(image_path):
-    """Returns a list of detected plate number strings."""
-    reader = get_reader()
+    # تعريف المكتبة EasyOCR
+    reader = easyocr.Reader(['en'])
+
+    # قرائة الصورة من المسار وتحويلها الى نواتج مصفوفة
     results = reader.readtext(image_path)
-    
+
+    # يأخذ فقط النواتج المقاربة للوحات السيارات
     plate_pattern = re.compile(r'^(?=.*[0-9])[A-Z0-9\s-]{4,10}$')
     plates = []
     
     for (_, text, prob) in results:
+        # تحويل جميع النواتج الى احرف كبيرة
         clean = text.strip().upper()
+        # اخذ النواتج القريبة من اللوحات باستخدام palte_pattern
         if plate_pattern.match(clean.replace(" ", "")) and prob > 0.4:
+            # اضافة النواتج القريبة الى مصفوفة
             plates.append(clean)
     
+    # ارجاع المصفوفة
     return plates
